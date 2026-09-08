@@ -1,0 +1,16 @@
+schema: osera-patch-evidence/0.1.0
+producer: d1gital-f playground producer
+release: 2.14.2+osera-patch.001
+baseline: v2.14.2+patch.baseline
+fixes:
+  - cve: CVE-2025-52999
+    upstream: https://github.com/FasterXML/jackson-core/pull/943
+    note: playground simulation, the release flow is real, the fix is a regression test only
+tests:
+  commit: 387b29be3747a51076fc3a49d40ea58c49c51ce6
+  command: mvn -B clean package -Dtest='!JdkFloatTest,!JdkDoubleTest,!**/failing/**' (the two JDK float formatting test classes fail identically on the untouched baseline under Java 21, the failing package is excluded by upstream's own POM)
+  runtime: OpenJDK 21.0.12.1, Apache Maven 3.9.16, macOS
+  report: jackson-core-2.14.2+osera-patch.001-tests.zip
+  result: pass
+  totals: 121333 tests, 0 failures, 0 errors, 16 skipped
+bytecode_level: 52
